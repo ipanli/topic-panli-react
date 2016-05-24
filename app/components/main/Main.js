@@ -23,12 +23,6 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <header styleName="header">
-          <div styleName="container">
-            <span> App: </span>
-            {this.state.isHome ? <span>首页 </span> : <span>子页面</span>}
-          </div>
-        </header>
         <section>
           <div styleName="container">
             {this.props.children}

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import cssModules from 'react-css-modules';
 import style from './styles.styl';
 import LazyLoad from 'react-lazy-load';
+import Pagination from '../pagination/';
 
 
 // 引入Fetch
@@ -15,6 +16,13 @@ class Topic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            index:1,
+            size:50,
+            pages:5,
+            total:250,
+            jumper:true,
+            banner:'',
+            title:'',
             data: []
         }        
     }
@@ -28,30 +36,59 @@ class Topic extends React.Component {
             })
             .then((data) => {
                 this.setState({
+                    
+                    banner:data.img,
+                    title:data.title,
                     data: data.Content
-                });       
+                });
+                
+                document.title = data.title + '- Panli代购';
+ 
             })
             .catch((ex) => {
                 console.log(ex);
             });
     }
+    
+  onChange (index) {
+    this.setState({ index });
+    alert(index);
+  }
  
   render() {
     return (
-      <div styleName="Github">
-        <div styleName='goBlack'><Link to="/">[返回]</Link></div>
-        {this.state.data.length > 0 ? <div>完成 </div> : <div>加载中...</div>}
-        {this.state.data.map((item, index) => 
+      <div styleName="Topic">
+        {this.state.banner.length > 0 ? <div styleName="TopicBanner" > 
+            <img src={this.state.banner} />
+         </div> : <div styleName="loadsta"> </div>}
+        
+        {this.state.data.length > 0 ? '' : <div >加载中...</div>}
+        <div styleName="TopicMain">
+        {this.state.data.map((item, index) =>
           <div styleName="prolistBox" key={index}>
                 <div styleName="thumbBox">
-                <LazyLoad height={200} offsetVertical={200}>
-                    <img src={item.img} />    
+                <LazyLoad height={225} offsetVertical={225}>
+                    <img src={item.img} />
                  </LazyLoad>
                     
                 </div>
-                {item.Name}
+                <h6 styleName="name">
+                    {item.Name}
+                </h6>
+                <p styleName="price">
+                    ￥{item.pric}
+                </p>
            </div>
         )}
+        </div>
+        
+        <Pagination
+            index={this.state.index}
+            size={this.state.size}
+            total={this.state.total}
+            jumper={this.state.jumper}
+            onChange={this.onChange.bind(this)} />
+
       </div>
     );
   }
