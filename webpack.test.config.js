@@ -14,14 +14,14 @@ module.exports = {
       exclude: /(node_modules|bower_components)/,
       loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss!stylus-loader'
     }, {
-      test: /\.(png|jpg)$/,
+      test: /\.(png|jpg|gif|svg)$/,
       exclude: /(node_modules|bower_components)/,
       loader: 'url-loader?name=images/[name].[ext]&limit=8192'
     }],
   },
   resolve: {
     root: path.join(__dirname, '..', 'app'),
-    extensions: ['', '.js', '.jsx', '.json', '.css', '.styl', '.png', '.jpg', '.jpeg', '.gif']
+    extensions: ['', '.js', '.jsx', '.json', '.css', '.styl', '.png', '.jpg', '.jpeg', '.gif','svg']
   },
   stylus: function () {
     return [sGrid, rupture]

@@ -29,7 +29,7 @@ config.module.loaders = [
     loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!stylus-loader')
   },
   {
-    test: /\.(png|jpg)$/,
+    test: /\.(png|jpg|gif|svg)$/,
     exclude: /(node_modules)/,
     loader: 'url-loader?name=images/[name].[ext]&limit=8192'
   }

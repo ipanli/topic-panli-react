@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import cssModules from 'react-css-modules';
 import style from './styles.styl';
+import LazyLoad from 'react-lazy-load';
 
 
 // 引入Fetch
@@ -43,7 +44,10 @@ class Topic extends React.Component {
         {this.state.data.map((item, index) => 
           <div styleName="prolistBox" key={index}>
                 <div styleName="thumbBox">
+                <LazyLoad height={200} offsetVertical={200}>
                     <img src={item.img} />    
+                 </LazyLoad>
+                    
                 </div>
                 {item.Name}
            </div>

@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'React Boilerplate with Webpack!',
+      title: 'Panli 专题代购列表页 React 重构!',
       template: './index_template.html',
       inject: 'body'
     }),
@@ -44,7 +44,7 @@ module.exports = {
         loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss!stylus-loader'
       },
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'url-loader?name=images/[name].[ext]&limit=8192'
       }
@@ -52,7 +52,7 @@ module.exports = {
   },
   resolve: {
     root: path.join(__dirname, '..', 'app'),
-    extensions: ['', '.js', '.jsx', '.json', '.css', '.styl', '.png', '.jpg', '.jpeg', '.gif']
+    extensions: ['', '.js', '.jsx', '.json', '.css', '.styl', '.png', '.jpg', '.jpeg', '.gif', '.svg']
   },
   stylus: function () {
     return [rupture]
