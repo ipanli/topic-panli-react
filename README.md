@@ -12,6 +12,7 @@ This is a simple React boilerplate with:
 - [React Router](https://www.npmjs.com/package/react-router)
 - [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html)
 - [PostCSS](https://github.com/postcss/postcss)
+- [Sass](http://sass-lang.com/)
 - [CSS Modules](https://github.com/css-modules/css-modules)
 - [React CSS Modules](https://github.com/gajus/react-css-modules)
 - [Stylus](https://www.npmjs.com/package/stylus)

@@ -1,8 +1,18 @@
 'use strict';
 
+//   index={int}         // 当前页码，默认为 1
+//   size={int}          // 每页显示条数，默认为 20
+//   pages={int}         // 显示的页码数， 默认为 10
+//   total={int}         // 总条目数，默认为 0
+//   jumper={bool}       // 是否可以输入页码，默认为 false
+//   mini={bool}         // 是否简化版本
+//   onChange={function} // 页码点击时触发事件，参数为页码
+
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
 import { forEach } from '../utils/objects';
+import cssModules from 'react-css-modules';
+import style from './styles.styl';
 
 
 class Pagination extends Component {
@@ -117,7 +127,7 @@ class Pagination extends Component {
     // Previous
     items.push(
       <li key="previous" onClick={index <= 1 ? null : this.handleChange.bind(this, index - 1)} className={classnames('previous', { disabled: index <= 1 })}>
-        <a><span>&nbsp;</span></a>
+        <a><span>上一页</span></a>
       </li>
     );
 
@@ -145,7 +155,7 @@ class Pagination extends Component {
     // Next
     items.push(
       <li key="next" onClick={index >= max ? null : this.handleChange.bind(this, index + 1)} className={classnames('next', { disabled: index >= max })}>
-        <a><span>&nbsp;</span></a>
+        <a><span>下一页</span></a>
       </li>
     );
 
@@ -163,8 +173,10 @@ class Pagination extends Component {
           this.props.jumper && !mini &&
           <form onSubmit={this.setInput}>
             <div className="rct-input-group">
+              <i>到第</i>
               <input ref="input" defaultValue={this.state.index} type="text" className="rct-form-control" />
-              <span onClick={this.setInput} className="addon">go</span>
+              <i>页</i>
+              <span onClick={this.setInput} className="addon">Go</span>
             </div>
           </form>
         }
@@ -192,4 +204,4 @@ Pagination.defaultProps = {
   total: 0
 };
 
-module.exports = Pagination;
+export default cssModules(Pagination, style);

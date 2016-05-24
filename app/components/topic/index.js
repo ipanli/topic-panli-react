@@ -9,6 +9,9 @@ import Pagination from '../pagination/';
 // 引入Fetch
 import 'whatwg-fetch';
 
+import './p.scss';
+
+
 const ap = 'https://api.github.com/users/octocat/gists';
 const ap2 = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=391&curPage=1&_=1463998084439';
 
@@ -19,7 +22,7 @@ class Topic extends React.Component {
             index:1,
             size:50,
             pages:5,
-            total:250,
+            total:0,
             jumper:true,
             banner:'',
             title:'',
@@ -35,8 +38,11 @@ class Topic extends React.Component {
                 return response.json();
             })
             .then((data) => {
+                let total = data.Count* this.state.size;
+                console.log(total);
+                
                 this.setState({
-                    
+                    total:total,
                     banner:data.img,
                     title:data.title,
                     data: data.Content
@@ -52,7 +58,7 @@ class Topic extends React.Component {
     
   onChange (index) {
     this.setState({ index });
-    alert(index);
+    console.log(index);
   }
  
   render() {
@@ -82,12 +88,14 @@ class Topic extends React.Component {
         )}
         </div>
         
-        <Pagination
+       {this.state.total > 50 ? 
+            <Pagination
             index={this.state.index}
             size={this.state.size}
             total={this.state.total}
             jumper={this.state.jumper}
             onChange={this.onChange.bind(this)} />
+             : ''}
 
       </div>
     );

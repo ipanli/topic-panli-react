@@ -44,6 +44,11 @@ module.exports = {
         loader: 'style!css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:5]!postcss!stylus-loader'
       },
       {
+        test: /.scss$/,
+        exclude: /node_modules/,
+        loaders: ["style", "css", "sass?config=otherSassLoaderConfig"]
+      },
+      {
         test: /\.(png|jpg|gif|svg)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'url-loader?name=images/[name].[ext]&limit=8192'
