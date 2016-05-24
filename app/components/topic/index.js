@@ -10,7 +10,7 @@ import 'whatwg-fetch';
 const ap = 'https://api.github.com/users/octocat/gists';
 const ap2 = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=391&curPage=1&_=1463998084439';
 
-class Github extends React.Component {
+class Topic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -52,4 +52,4 @@ class Github extends React.Component {
     );
   }
 }
-export default cssModules(Github, style);
+export default cssModules(Topic, style);

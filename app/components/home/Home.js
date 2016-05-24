@@ -9,10 +9,7 @@ import { addTodo, counterTick } from '../../redux/actions';
 
 const Home = (props) => {
   const { todos, dispatchAddTodo, ticker, dispatchCounterTick } = props;
-  // const users = {
-  //   user1: 'user-1',
-  //   user2: 'user-2',
-  // };
+
   const arr = [
     'user-1',
     'user-2'

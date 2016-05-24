@@ -55,7 +55,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.json', '.css', '.styl', '.png', '.jpg', '.jpeg', '.gif']
   },
   stylus: function () {
-    return [sGrid, rupture]
+    return [rupture]
   },
   postcss: function () {
     return [autoprefixer];
