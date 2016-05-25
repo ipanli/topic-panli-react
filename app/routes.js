@@ -9,8 +9,7 @@ export default (
   <Route path="/" component={Main}>
     <IndexRoute component={Index} />
     <Route path="404" component={Error} />
-    <Route path="list/:id" component={Topic} />
-    <Route path="list/:id/page/:page" component={Topic} />
+    <Route path="list/:id(/page/:page)" component={Topic} />
     <Route path="*" component={Error} />
   </Route>
 );
