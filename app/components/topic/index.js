@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link , withRouter, RouterContext} from 'react-router';
 import cssModules from 'react-css-modules';
 import style from './styles.styl';
 import LazyLoad from 'react-lazy-load';
 import Pagination from '../pagination/';
 
+import { apiTopic } from '../api/';
 
 // 引入Fetch
 import 'whatwg-fetch';
@@ -12,14 +13,29 @@ import 'whatwg-fetch';
 import './p.scss';
 
 
-const ap = 'https://api.github.com/users/octocat/gists';
-const ap2 = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=391&curPage=1&_=1463998084439';
+const ap = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=';
+const api = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=391&curPage=1&_=1463998084439';
+const endApi = apiTopic();
 
 class Topic extends React.Component {
+    // componentDidMount() {
+    // this.props.router.setRouteLeaveHook(this.props.route, () => {
+    //   if (this.state.unsaved)
+    //     return 'You have unsaved information, are you sure you want to leave this page?'
+    //    })
+    // }
+    
+
+
     constructor(props) {
+        const { params } = props;
+        const picId = params.id ? params.id : '';
+        let page = params.page ? Number(params.page) : 1;
         super(props);
         this.state = {
-            index:1,
+            Id:picId,
+            Page:page,
+            index:page,
             size:50,
             pages:5,
             total:0,
@@ -29,11 +45,15 @@ class Topic extends React.Component {
             data: []
         }        
     }
-    
-    
- // 组件渲染后获取外界数据
-    componentDidMount() {
-        fetch(ap2)
+    GetApiData(title,Page){
+      let ist = title || null;
+      let listId = this.state.Id;
+     
+      let endApiUrl = endApi + listId + '&curPage='+ Page;
+        console.log(listId)
+        console.log(Page)
+        console.log(endApiUrl)
+        fetch(endApiUrl)
             .then((response) => {
                 return response.json();
             })
@@ -48,18 +68,32 @@ class Topic extends React.Component {
                     data: data.Content
                 });
                 
-                document.title = data.title + '- Panli代购';
- 
+               ist ? document.title = data.title + '- Panli代购': '';
+
             })
             .catch((ex) => {
                 console.log(ex);
             });
+        
+    }
+ // 组件渲染后获取外界数据
+    componentDidMount() {
+         console.log(RouterContext + 1);
+        this.GetApiData(1,this.state.Page);
     }
     
-  onChange (index) {
-    this.setState({ index });
-    console.log(index);
-  }
+    onChange (index) {
+        this.setState({ 
+            Page:index
+         });
+        let Id =  this.state.Id;
+       
+       
+       
+        this.GetApiData(null,index );
+        
+        RouterContext.context.route.push('/list/'+ Id +'/page/'+index); 
+    }
  
   render() {
     return (
