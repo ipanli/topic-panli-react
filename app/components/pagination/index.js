@@ -41,7 +41,8 @@ class Pagination extends Component {
 
   setInput (event) {
     event.preventDefault();
-
+    let { total, size, index, pages } = this.props;
+    let max = Math.ceil(total / size);
     let value = this.refs.input.value;
     value = parseInt(value);
     if (isNaN(value)) {
@@ -49,6 +50,10 @@ class Pagination extends Component {
     }
     if (value < 1) {
       this.handleChange(1);
+      return;
+    }
+    if (value > max) {
+      this.handleChange(max);
       return;
     }
 

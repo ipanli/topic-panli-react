@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link ,  browserHistory} from 'react-router';
+import { Link ,  hashHistory} from 'react-router';
 import cssModules from 'react-css-modules';
 import style from './styles.styl';
 import LazyLoad from 'react-lazy-load';
@@ -91,10 +91,14 @@ class Topic extends React.Component {
        
         
        
-        this.GetApiData(null,index );
+        
         // this.props.router.push('/')
         const path = `/list/${Id}/${index}`
-        browserHistory.push(path)
+        
+        console.log(hashHistory);
+        hashHistory.push(path)
+        
+        this.GetApiData(null,index );
         // RouterContext.context.route.push('/list/'+ Id +'/page/'+index); 
     }
  
@@ -109,18 +113,20 @@ class Topic extends React.Component {
         <div styleName="TopicMain">
         {this.state.data.map((item, index) =>
           <div styleName="prolistBox" key={index}>
-                <div styleName="thumbBox">
-                <LazyLoad height={225} offsetVertical={225}>
-                    <img src={item.img} />
-                 </LazyLoad>
-                    
-                </div>
-                <h6 styleName="name">
-                    {item.Name}
-                </h6>
-                <p styleName="price">
-                    ￥{item.pric}
-                </p>
+                <a href={`http://www.panli.com/Crawler.aspx?purl=${item.Producturl}`} target="_blank" >
+                    <div styleName="thumbBox">
+                    <LazyLoad height={225} offsetVertical={225}>
+                        <img src={item.img} />
+                    </LazyLoad>
+                        
+                    </div>
+                    <h6 styleName="name">
+                        {item.Name}
+                    </h6>
+                    <p styleName="price">
+                        ￥{item.pric}
+                    </p>
+                </a>
            </div>
         )}
         </div>
