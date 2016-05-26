@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link , withRouter, RouterContext} from 'react-router';
+import { Link ,  browserHistory} from 'react-router';
 import cssModules from 'react-css-modules';
 import style from './styles.styl';
 import LazyLoad from 'react-lazy-load';
@@ -43,12 +43,7 @@ class Topic extends React.Component {
         }        
     }
     
-    componentWillMount() {
-      this.props.router.setRouteLeaveHook(
-        this.props.route,
-        this.routerWillLeave
-      )
-    }
+   
     
     
     GetApiData(title,Page){
@@ -94,10 +89,12 @@ class Topic extends React.Component {
          });
         let Id =  this.state.Id;
        
-       
+        
        
         this.GetApiData(null,index );
         // this.props.router.push('/')
+        const path = `/list/${Id}/${index}`
+        browserHistory.push(path)
         // RouterContext.context.route.push('/list/'+ Id +'/page/'+index); 
     }
  
@@ -141,4 +138,4 @@ class Topic extends React.Component {
     );
   }
 }
-export default withRouter(cssModules(Topic, style));
+export default cssModules(Topic, style);
