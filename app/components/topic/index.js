@@ -13,18 +13,15 @@ import 'whatwg-fetch';
 import './p.scss';
 
 
-const ap = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=';
 const api = '/ShoppingGuideAPI/GetTopicItems?pageSize=50&id=391&curPage=1&_=1463998084439';
+
 const endApi = apiTopic();
 
+
+
+
+
 class Topic extends React.Component {
-    // componentDidMount() {
-    // this.props.router.setRouteLeaveHook(this.props.route, () => {
-    //   if (this.state.unsaved)
-    //     return 'You have unsaved information, are you sure you want to leave this page?'
-    //    })
-    // }
-    
 
 
     constructor(props) {
@@ -45,14 +42,23 @@ class Topic extends React.Component {
             data: []
         }        
     }
+    
+    componentWillMount() {
+      this.props.router.setRouteLeaveHook(
+        this.props.route,
+        this.routerWillLeave
+      )
+    }
+    
+    
     GetApiData(title,Page){
       let ist = title || null;
       let listId = this.state.Id;
      
       let endApiUrl = endApi + listId + '&curPage='+ Page;
-        console.log(listId)
-        console.log(Page)
-        console.log(endApiUrl)
+        // console.log(listId)
+        // console.log(Page)
+        // console.log(endApiUrl)
         fetch(endApiUrl)
             .then((response) => {
                 return response.json();
@@ -78,7 +84,7 @@ class Topic extends React.Component {
     }
  // 组件渲染后获取外界数据
     componentDidMount() {
-         console.log(RouterContext + 1);
+       
         this.GetApiData(1,this.state.Page);
     }
     
@@ -91,8 +97,8 @@ class Topic extends React.Component {
        
        
         this.GetApiData(null,index );
-        
-        RouterContext.context.route.push('/list/'+ Id +'/page/'+index); 
+        // this.props.router.push('/')
+        // RouterContext.context.route.push('/list/'+ Id +'/page/'+index); 
     }
  
   render() {
@@ -135,4 +141,4 @@ class Topic extends React.Component {
     );
   }
 }
-export default cssModules(Topic, style);
+export default withRouter(cssModules(Topic, style));

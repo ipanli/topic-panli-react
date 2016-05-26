@@ -30,7 +30,7 @@
     "react-dom": "~15.0.2",
     "react-lazy-load": "^3.0.10",
     "react-redux": "^4.4.5",
-    "react-router": "~2.4.0",
+    "react-router": "^2.4.1",
     "redux": "^3.5.2",
     "rupture": "~0.6.1",
     "s-grid": "~1.1.2",
